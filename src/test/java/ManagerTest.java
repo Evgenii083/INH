@@ -9,7 +9,8 @@ public class ManagerTest {
     Product item1 = new Product(1, "Поворская книга", 56);
     Product item2 = new Product(2, "Samsung Galaxy S22", 97_000);
     Product item3 = new Product(3, "Тетрадь", 34);
-    Product item4 = new Product(4, "Iphone 14 pro", 125_000);
+    Product item4 = new Product(4, "Iphone", 125_000);
+    Product item5 = new Product(5, "Ipad", 135_000);
 
 
     @Test
@@ -19,9 +20,24 @@ public class ManagerTest {
         manager.add(item2);
         manager.add(item3);
         manager.add(item4);
+        manager.add(item5);
 
-        Product[] expected = {item3};
-        Product[] actual = manager.searchBy("Тетрадь");
+        Product[] expected = {item5};
+        Product[] actual = manager.searchBy("Ipad");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shouldSearchBySimilarName() {
+
+        manager.add(item1);
+        manager.add(item2);
+        manager.add(item3);
+        manager.add(item4);
+        manager.add(item5);
+
+        Product[] expected = {item4,item5};
+        Product[] actual = manager.searchBy("Ip");
+
         Assertions.assertArrayEquals(expected, actual);
     }
 
@@ -34,7 +50,7 @@ public class ManagerTest {
         manager.add(item4);
 
         Product[] expected = {};
-        Product[] actual = manager.searchBy("Т345");
+        Product[] actual = manager.searchBy("Audi");
         Assertions.assertArrayEquals(expected, actual);
 
 
